@@ -52,14 +52,14 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at']; // Specify the column to use for soft deletes
 
-    public function level_user()
+    public function levelUser()
     {
-        return $this->belongsTo(level_user::class, 'id_level_user', 'id');
+        return $this->belongsTo(levelUser::class, 'id_level_user', 'id');
     }
 
-    public function kalender_beasiswa()
+    public function kalenderBeasiswa()
     {
-        return $this->hasMany(kalender_beasiswa::class, 'id_user', 'id');
+        return $this->hasMany(kalenderBeasiswa::class, 'id_user', 'id');
     }
 
     public function softDeleteUser()

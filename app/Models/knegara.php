@@ -13,10 +13,10 @@ class knegara extends Model
     protected $fillable = ['id_kbeasiswa', 'id_negara'];
     protected $table = 'knegaras'; // Ensure the correct table name is specified
 
-    // Define relationship with kalender_beasiswa
-    public function kalender_beasiswa()
+    // Define relationship with kalenderBeasiswa
+    public function kalenderBeasiswa()
     {
-        return $this->belongsTo(kalender_beasiswa::class, 'id_kbeasiswa', 'id');
+        return $this->belongsTo(kalenderBeasiswa::class, 'id_kbeasiswa', 'id');
     }
 
     // Define relationship with Negara (countries)

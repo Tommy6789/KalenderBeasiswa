@@ -1,6 +1,8 @@
 @extends('frontend.partials.master')
 
 @section('content')
+<br>
+<br>
 <!-- Inline CSS for styling -->
 <style>
     .page-section {
@@ -135,7 +137,7 @@
                     <div class="mb-3">
                         <strong>Tingkat Studi:</strong>
                         <ul>
-                            @foreach ($data->tingkat_studi as $tingkat)
+                            @foreach ($data->tingkatStudi as $tingkat)
                                 <li>{{ $tingkat->nama }}</li>
                             @endforeach
                         </ul>
@@ -187,7 +189,7 @@
 
         <!-- Register Button -->
         <div class="text-center mt-5">
-            <a href="{{ route('daftar_beasiswa', ['id' => $data->id]) }}" class="btn-register">Register Now</a>
+            <a href="{{ route('daftar_beasiswa', ['id' => $data]) }}" class="btn-register">Register Now</a>
         </div>
     </div>
 </section>

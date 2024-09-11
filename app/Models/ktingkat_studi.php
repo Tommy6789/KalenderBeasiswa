@@ -14,14 +14,14 @@ class ktingkat_studi extends Model
 
     protected $table = 'ktingkat_studis'; // Ensure the correct table name is specified
 
-    public function kalender_beasiswa()
+    public function kalenderBeasiswa()
     {
-        return $this->belongsTo(kalender_beasiswa::class, 'id_kbeasiswa', 'id');
+        return $this->belongsTo(kalenderBeasiswa::class, 'id_kbeasiswa', 'id');
     }
 
-    public function tingkat_studi()
+    public function tingkatStudi()
     {
-        return $this->belongsTo(tingkat_studi::class, 'id_tingkat_studi', 'id')->withTrashed(); // Include soft deleted tingkat_studi
+        return $this->belongsTo(tingkatStudi::class, 'id_tingkat_studi', 'id')->withTrashed(); // Include soft deleted tingkatStudi
     }
 
 }

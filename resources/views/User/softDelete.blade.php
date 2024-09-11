@@ -49,7 +49,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
-                                                <form action="{{ route('user_force_delete', $item->id) }}" method="POST">
+                                                <form action="{{ route('user_forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"

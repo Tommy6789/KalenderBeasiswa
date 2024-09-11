@@ -1,4 +1,4 @@
-@extends('kalender_beasiswa.partials.master')
+@extends('kalenderBeasiswa.partials.master')
 @section('content')
     <!-- Content Wrapper -->
     <div class="content-wrapper">
@@ -92,7 +92,7 @@
                                                     <td>Pending</td> <!-- Show 'Pending' if status_tampil is 0 -->
                                                     <td>
                                                         <!-- Terima Proposal Button -->
-                                                        <form action="{{ route('kalender_beasiswa.accept', $item->id) }}" method="POST" style="display:inline;">
+                                                        <form action="{{ route('kalenderBeasiswa.accept', $item->id) }}" method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('PATCH')
                                                             <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to accept this proposal?')">Terima Proposal</button>
@@ -111,4 +111,26 @@
             </div>
         </section>
     </div>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
+    @endif
+    @if(session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: '{{ session('error') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
+    @endif
+</script>
 @endsection

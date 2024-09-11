@@ -87,7 +87,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
-                                                <form action="{{ route('kbeasiswa_force_delete', $item->id) }}" method="POST">
+                                                <form action="{{ route('kbeasiswa_forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"
@@ -126,6 +126,8 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -138,6 +140,44 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
+            // SweetAlert2 for delete confirmation
+            $('form').on('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const form = $(this);
+                if (form.find('button').hasClass('btn-danger')) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel!",
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.off('submit').submit(); // Submit the form if confirmed
+                        } else {
+                            swalWithBootstrapButtons.fire({
+                                title: "Cancelled",
+                                text: "Your imaginary file is safe :)",
+                                icon: "error"
+                            });
+                        }
+                    });
+                } else {
+                    form.off('submit').submit(); // Submit the form if not a delete button
+                }
+            });
+        });
+
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+          },
+          buttonsStyling: false
         });
     </script>
 </body>

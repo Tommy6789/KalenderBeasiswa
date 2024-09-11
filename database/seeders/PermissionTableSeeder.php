@@ -17,7 +17,10 @@ class PermissionTableSeeder extends Seeder
             'kalender-create',
             'kalender-edit',
             'kalender-delete',
-            'artikel-'
+            'artikel-list',
+            'artikel-create',
+            'artikel-edit',
+            'artikel-delete',
         ];
     }
 }

@@ -1,6 +1,11 @@
 @extends('frontend.partials.master')
 
 @section('content')
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="container my-5">
     <div class="row">
         <!-- Main Content -->

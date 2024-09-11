@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft Deleted Level User</title>
+    <title>Soft Deleted Tingkat Studi</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+    <!-- SweetAlert2 CSS (optional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -20,11 +23,11 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Soft Deleted Level User</div>
+                    <div class="card-header">Soft Deleted Tingkat Studi</div>
 
                     <div class="card-body">
                         @if ($trash->isEmpty())
-                            <p>No soft deleted Level User found.</p>
+                            <p>No soft deleted Tingkat Studi found.</p>
                         @else
                             @php $no = 1; @endphp
                             <table id="example2" class="table table-bordered table-striped">
@@ -45,11 +48,11 @@
                                             <td>{{ $item->deleted_at->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ $item->deleted_at->addDays(30)->diffForHumans(null, true) }}</td>
                                             <td>
-                                                <form action="{{ route('level_user_restore', $item->id) }}" method="POST">
+                                                <form action="{{ route('tingkat_studi_restore', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
-                                                <form action="{{ route('level_user_force_delete', $item->id) }}" method="POST">
+                                                <form action="{{ route('tingkat_studi_forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"
@@ -65,7 +68,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('level_user.index') }}" class="btn btn-primary">Kembali Level User</a>
+                        <a href="{{ route('tingkat_studi.index') }}" class="btn btn-primary">Kembali Tingkat Studi</a>
                     </div>
                 </div>
             </div>
@@ -90,6 +93,29 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+        @endif
+        @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '{{ session('error') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+        @endif
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#example2').DataTable({
@@ -104,5 +130,4 @@
         });
     </script>
 </body>
-
 </html>

@@ -19,7 +19,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core Theme CSS (includes Bootstrap) -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="css/app.css" />
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     {{-- Option Select --}}
@@ -70,7 +69,7 @@
                             <a class="nav-link" href="{{ route('subscriber_login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('kalender_beasiswa.index') }}">Dashboard</a>
+                            <a class="nav-link" href="{{ route('kalenderBeasiswa.index') }}">Dashboard</a>
                         </li>
                     @else
                         <li class="nav-item">
@@ -90,7 +89,7 @@
                             <a class="nav-link text-black" href="{{ route('subscriber_login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="{{ route('kalender_beasiswa.index') }}">Dashboard</a>
+                            <a class="nav-link text-black" href="{{ route('kalenderBeasiswa.index') }}">Dashboard</a>
                         </li>
                     @endif
 
@@ -98,19 +97,10 @@
             </div>
         </div>
     </nav>
+    @if (Route::currentRouteName() != 'home')
+        <br>
+        <br>
+        <br>
+    @endif
 
     <!-- Masthead -->
-
-    {{-- <header class="masthead" id="Home">
-        <div class="container px-4 px-lg-5 h-100">
-            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
-                    <h1 class="text-white font-weight-bold">Kalender Beasiswa</h1>
-                    <hr class="divider" />
-                </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 mb-5">Cari Beasiswa Untuk Studi Mu</p>
-                </div>
-            </div>
-        </div>
-    </header> --}}

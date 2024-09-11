@@ -1,6 +1,9 @@
 @extends('frontend.partials.master')
 
 @section('content')
+<br>
+<br>
+<br>
 
 <!-- Form to Create a New Scholarship Calendar Proposal -->
 <div class="container mt-20">
@@ -10,11 +13,11 @@
 
             <!-- Kategori Section -->
             <div class="form-section mb-4">
-                <h1>Kategori</h1>
+                <h1 class="mb-5" ><b>Kategori</b></h1>
 
                 <!-- Negara Select -->
-                <div class="form-group">
-                    <label for="option_negara">Negara</label>
+                <div class="form-group mb-4">
+                    <label for="option_negara" class="mb-2">Negara</label>
                     <select class="form-control" name="id_negara[]" id="option_negara" multiple required>
                         @foreach ($negara as $i)
                             <option value="{{ $i->id }}">{{ $i->nama }}</option>
@@ -23,8 +26,8 @@
                 </div>
 
                 <!-- Tingkat Studi Select -->
-                <div class="form-group">
-                    <label for="option_tingkat_studi">Tingkat Studi</label>
+                <div class="form-group mb-5">
+                    <label for="option_tingkat_studi" class="mb-2">Tingkat Studi</label>
                     <select class="form-control" name="id_tingkat_studi[]" id="option_tingkat_studi" multiple required>
                         @foreach ($tingkat_studi as $i)
                             <option value="{{ $i->id }}">{{ $i->nama }}</option>
@@ -34,42 +37,42 @@
             </div>
 
             <!-- Tentang Section -->
-            <div class="form-section mb-4">
-                <h1>Tentang</h1>
+            <div class="form-section mb-5 mt-5">
+                <h1 class="mt-5"><b>Tentang</b></h1>
 
                 <!-- Form Fields -->
-                <div class="form-group">
-                    <label for="tanggal_registrasi">Tanggal Registrasi</label>
+                <div class="form-group mb-4 mt-5">
+                    <label for="tanggal_registrasi" class="mb-2">Tanggal Registrasi</label>
                     <input type="date" class="form-control" name="tanggal_registrasi" id="tanggal_registrasi" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="deadline">Deadline</label>
+                <div class="form-group mb-4">
+                    <label for="deadline" class="mb-2">Deadline</label>
                     <input type="date" class="form-control" name="deadline" id="deadline" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="judul">Judul</label>
+                <div class="form-group mb-4">
+                    <label for="judul" class="mb-2">Judul</label>
                     <input type="text" class="form-control" name="judul" id="judul" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="nama">Nama Universitas</label>
+                <div class="form-group mb-4">
+                    <label for="nama" class="mb-2">Nama Universitas</label>
                     <input type="text" class="form-control" name="nama" id="nama" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
+                <div class="form-group mb-4">
+                    <label for="deskripsi" class="mb-2">Deskripsi</label>
                     <textarea name="deskripsi" class="form-control" id="deskripsi" cols="15" rows="10" required></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="jurusan">Jurusan</label>
+                <div class="form-group mb-4">
+                    <label for="jurusan" class="mb-2">Jurusan</label>
                     <input type="text" class="form-control" name="jurusan" id="jurusan" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="jenis_beasiswa">Jenis Beasiswa</label>
+                <div class="form-group mb-4">
+                    <label for="jenis_beasiswa" class="mb-2">Jenis Beasiswa</label>
                     <select name="jenis_beasiswa" class="form-control" id="jenis_beasiswa" required>
                         <option value="">Pilih Jenis Beasiswa</option>
                         <option value="full">Full</option>

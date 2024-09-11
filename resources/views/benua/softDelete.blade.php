@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft Deleted Tingkat Studi</title>
+    <title>Soft Deleted Benua</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,11 +20,11 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Soft Deleted Tingkat Studi</div>
+                    <div class="card-header">Soft Deleted Benua</div>
 
                     <div class="card-body">
                         @if ($trash->isEmpty())
-                            <p>No soft deleted Tingkat Studi found.</p>
+                            <p>No soft deleted Benua found.</p>
                         @else
                             @php $no = 1; @endphp
                             <table id="example2" class="table table-bordered table-striped">
@@ -45,16 +45,17 @@
                                             <td>{{ $item->deleted_at->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ $item->deleted_at->addDays(30)->diffForHumans(null, true) }}</td>
                                             <td>
-                                                <form action="{{ route('tingkat_studi_restore', $item->id) }}" method="POST">
+                                                <!-- Button Restore -->
+                                                <form action="{{ route('benua_restore', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
-                                                <form action="{{ route('tingkat_studi_force_delete', $item->id) }}" method="POST">
+                                                <!-- Button Force Delete -->
+                                                <form action="{{ route('benua_forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Yakin Untuk Menghapus Data ini Secara Permanent?')">Permanent
-                                                        Delete</button>
+                                                    <button type="submit" class="btn btn-danger" onclick="return 
+                                                    confirm('Yakin Untuk Menghapus Data ini Secara Permanent?')">Permanent Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -65,7 +66,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('tingkat_studi.index') }}" class="btn btn-primary">Kembali Tingkat Studi</a>
+                        <a href="{{ route('benua.index') }}" class="btn btn-primary">Kembali Benua</a>
                     </div>
                 </div>
             </div>

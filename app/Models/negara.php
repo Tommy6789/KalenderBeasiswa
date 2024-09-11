@@ -18,9 +18,9 @@ class negara extends Model
         return $this->belongsTo(benua::class, 'id_benua', 'id');
     }
 
-    public function kalender_beasiswa()
+    public function kalenderBeasiswa()
     {
-        return $this->belongsToMany(kalender_beasiswa::class, 'knegaras', 'id_negara', 'id_kbeasiswa')
+        return $this->belongsToMany(kalenderBeasiswa::class, 'knegaras', 'id_negara', 'id_kbeasiswa')
             ->withPivot('deleted_at')
             ->withTimestamps()
             ->using(Knegara::class); // Ensure using the correct pivot model

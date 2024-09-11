@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class level_user extends Model
+class levelUser extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['nama'];
@@ -23,7 +23,7 @@ class level_user extends Model
     }
 
     /**
-     * Restore the soft deleted level_user record.
+     * Restore the soft deleted levelUser record.
      */
     public function restoreLevelUser()
     {
@@ -33,7 +33,7 @@ class level_user extends Model
     }
 
     /**
-     * Force delete (permanently delete) the level_user record.
+     * Force delete (permanently delete) the levelUser record.
      */
     public function forceDeleteLevelUser()
     {

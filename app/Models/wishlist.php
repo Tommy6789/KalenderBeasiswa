@@ -14,10 +14,10 @@ class Wishlist extends Model
     ];
 
     /**
-     * Get the kalender_beasiswa associated with the wishlist item.
+     * Get the kalenderBeasiswa associated with the wishlist item.
      */
     public function kalenderBeasiswa()
     {
-        return $this->belongsTo(kalender_beasiswa::class, 'id_kbeasiswa');
+        return $this->belongsTo(kalenderBeasiswa::class, 'id_kbeasiswa');
     }
 }
