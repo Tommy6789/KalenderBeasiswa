@@ -57,7 +57,7 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>
-                                                @foreach ($item->tingkat_studi as $tingkat)
+                                                @foreach ($item->tingkatStudi as $tingkat)
                                                     {{ $tingkat->nama }}<br>
                                                 @endforeach
                                             </td>
@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('kalender_beasiswa.index') }}" class="btn btn-primary">Kembali Kalender Beasiswa</a>
+                        <a href="{{ route('kalenderBeasiswa.index') }}" class="btn btn-primary">Kembali Kalender Beasiswa</a>
                     </div>
                 </div>
             </div>
