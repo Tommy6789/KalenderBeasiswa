@@ -29,7 +29,7 @@
                 <div class="form-group mb-5">
                     <label for="option_tingkat_studi" class="mb-2">Tingkat Studi</label>
                     <select class="form-control" name="id_tingkat_studi[]" id="option_tingkat_studi" multiple required>
-                        @foreach ($tingkat_studi as $i)
+                        @foreach ($tingkatStudi as $i)
                             <option value="{{ $i->id }}">{{ $i->nama }}</option>
                         @endforeach
                     </select>

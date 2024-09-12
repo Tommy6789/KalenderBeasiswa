@@ -88,9 +88,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::delete('negara/forceDelete/{id}', [NegaraController::class, 'forceDelete'])->name('negara_forceDelete');
 
   // Route soft delete, restore, and force delete for Benua
-  Route::get('benua_softDelete', [BenuaController::class, 'softDelete'])->name('benua_softDelete');
-  Route::post('benua/restore/{id}', [BenuaController::class, 'restore'])->name('benua_restore');
-  Route::delete('benua/forceDelete/{id}', [BenuaController::class, 'forceDelete'])->name('benua_forceDelete');
+  Route::get('benua.softDelete', [BenuaController::class, 'softDelete'])->name('benua.softDelete');
+  Route::post('benua/restore/{id}', [BenuaController::class, 'restore'])->name('benua.restore');
+  Route::delete('benua/forceDelete/{id}', [BenuaController::class, 'forceDelete'])->name('benua.forceDelete');
 
   // Route soft delete, restore, and force delete for User
   Route::get('user_softDelete', [UserController::class, 'softDelete'])->name('user_softDelete');

@@ -35,7 +35,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 Tambah Benua</button>
 <!--Button To Page Soft Delete-->
-<a href="{{ route('benua_softDelete') }}" type="button"
+<a href="{{ route('benua.softDelete') }}" type="button"
 class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 
 <!-- Modal -->
@@ -139,4 +139,27 @@ class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+@if (session('success'))
+Swal.fire({
+icon: 'success',
+title: 'Success!',
+text: '{{ session('success') }}',
+timer: 3000,
+showConfirmButton: false
+});
+@endif
+@if (session('error'))
+Swal.fire({
+icon: 'error',
+title: 'Error!',
+text: '{{ session('error') }}',
+timer: 3000,
+showConfirmButton: false
+});
+@endif
+</script>
 @endsection

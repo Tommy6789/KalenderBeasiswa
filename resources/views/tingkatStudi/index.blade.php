@@ -154,23 +154,35 @@ aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-@if (session('success'))
-Swal.fire({
-icon: 'success',
-title: 'Success!',
-text: '{{ session('success') }}',
-timer: 3000,
-showConfirmButton: false
-});
-@endif
-@if (session('error'))
-Swal.fire({
-icon: 'error',
-title: 'Error!',
-text: '{{ session('error') }}',
-timer: 3000,
-showConfirmButton: false
-});
-@endif
+    @if (session('success_add'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Benua berhasil ditambahkan!',
+        timer: 3000,
+        showConfirmButton: false
+    });
+    @endif
+
+    @if (session('success_delete'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Benua berhasil dipindahkan ke soft delete!',
+        timer: 3000,
+        showConfirmButton: false
+    });
+    @endif
+
+    @if (session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: '{{ session('error') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
+    @endif
 </script>
 @endsection
+

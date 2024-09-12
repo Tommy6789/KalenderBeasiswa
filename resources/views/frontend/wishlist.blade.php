@@ -40,7 +40,7 @@
                                     <div class="card h-100 shadow-sm">
                                         <div class="card-body">
                                             <div class="mb-2">
-                                                @foreach ($wishlist->kalenderBeasiswa->tingkat_studi as $tingkat)
+                                                @foreach ($wishlist->kalenderBeasiswa->tingkatStudi as $tingkat)
                                                     <span class="badge bg-primary">{{ $tingkat->nama }}</span>
                                                 @endforeach
                                                 @foreach ($wishlist->kalenderBeasiswa->negara as $negara)

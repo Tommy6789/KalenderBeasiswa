@@ -124,9 +124,9 @@ class BenuaController extends Controller
       // Perform force delete
       $benua->forceDeleteBenua();
 
-      return redirect()->route('benua_softDelete')->with('success', 'Benua permanently deleted.');
+      return redirect()->route('benua.softDelete')->with('success', 'Benua permanently deleted.');
     } catch (\Exception $e) {
-      return redirect()->route('benua_softDelete')->with('error', 'Failed to permanently delete Benua.');
+      return redirect()->route('benua.softDelete')->with('error', 'Failed to permanently delete Benua.');
     }
   }
 }

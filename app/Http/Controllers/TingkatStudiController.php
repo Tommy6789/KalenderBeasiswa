@@ -123,9 +123,9 @@ class TingkatStudiController extends Controller
       // Perform force delete
       $tingkatStudi->forceDeleteTingkatStudi();
 
-      return redirect()->route('tingkat_studi_softDelete')->with('success', 'Tingkat Studi permanently deleted.');
+      return redirect()->route('tingkatStudi.softDelete')->with('success', 'Tingkat Studi permanently deleted.');
     } catch (\Exception $e) {
-      return redirect()->route('tingkat_studi_softDelete')->with('error', 'Failed to permanently delete Tingkat Studi.');
+      return redirect()->route('tingkatStudi.softDelete')->with('error', 'Failed to permanently delete Tingkat Studi.');
     }
   }
 }
