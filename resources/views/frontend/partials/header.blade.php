@@ -56,11 +56,10 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('kalender') }}#KalenderBeasiswa">Kalender
-                                Beasiswa</a>
+                            <a class="nav-link" href="{{ route('kalender') }}#KalenderBeasiswa">Kalender Beasiswa</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{ route('proposal.store') }}">Artikel</a>
+                            <a class="nav-link" href="{{ route('proposal.store') }}">Proposal</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('wishlist') }}">Wishlist</a>
@@ -76,11 +75,10 @@
                             <a class="nav-link text-black" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-black" href="{{ route('kalender') }}#KalenderBeasiswa">Kalender
-                                Beasiswa</a>
+                            <a class="nav-link text-black" href="{{ route('kalender') }}#KalenderBeasiswa">Kalender Beasiswa</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link text-black" href="{{ route('proposal.store') }}">Artikel</a>
+                            <a class="nav-link text-black" href="{{ route('proposal.store') }}">Proposal</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-black" href="{{ route('wishlist') }}">Wishlist</a>
