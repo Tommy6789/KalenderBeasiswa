@@ -17,8 +17,8 @@ class FrontendController extends Controller
 
    public function kalender(FrontendKalenderRequest $request)
    {
-      $tingkatStudiOptions = TingkatStudi::all(); // Ambil data Tingkat Studi
-      $negaraOptions = Negara::all(); // Ambil data Negara
+      $tingkatStudi = TingkatStudi::all(); // Ambil data Tingkat Studi
+      $negara = Negara::all(); // Ambil data Negara
       $sort = $request->query('sort', 'desc'); // Default sort adalah descending (terbaru)
 
       $data = KalenderBeasiswa::with(['negara', 'tingkatStudi'])
@@ -29,13 +29,13 @@ class FrontendController extends Controller
       if ($request->ajax()) {
          return response()->json([
             'data' => $data,
-            'negara' => $negaraOptions,
-            'tingkatStudi' => $tingkatStudiOptions,
+            'negara' => $negara,
+            'tingkatStudi' => $tingkatStudi,
             'sort' => $sort
          ]);
       }
 
-      return view('frontend.kalender', compact('data', 'negaraOptions', 'tingkatStudiOptions', 'sort'));
+      return view('frontend.kalender', compact('data', 'negara', 'tingkatStudi', 'sort'));
    }
 
    public function filter(Request $request)

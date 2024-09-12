@@ -70,28 +70,23 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+                <!-- Urutkan Tanggal Filter -->
+                <div class="form-group mt-4">
+                    <label for="LabelDateSort">Urutkan Tanggal</label>
+                    <select name="sort" id="LabelDateSort" onchange="this.form.submit()" class="form-select">
+                        <option value="desc" {{ $sort === 'desc' ? 'selected' : '' }}>Terbaru</option>
+                        <option value="asc" {{ $sort === 'asc' ? 'selected' : '' }}>Terlama</option>
+                    </select>
+                </div>
+
                 <a href="{{ route('kalender') }}" class="btn btn-warning mt-3">Reset Filters</a>
+                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
             </form>
         </div>
 
         <!-- Main Content -->
         <div class="col-lg-9" id="KalenderBeasiswa">
             <section class="content">
-                <div class="header d-flex justify-content-end mb-3">
-                    <form method="GET" action="{{ url()->current() }}">
-                        <div class="form-group">
-                            <label for="LabelDateSort">Urutkan Tanggal</label>
-                            <div class="input-group">
-                                <select name="sort" id="LabelDateSort" onchange="this.form.submit()" class="form-select">
-                                    <option value="desc" {{ $sort === 'desc' ? 'selected' : '' }}>Terbaru</option>
-                                    <option value="asc" {{ $sort === 'asc' ? 'selected' : '' }}>Terlama</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
                 <!-- Articles -->
                 <div class="row" id="articleList">
                     @if ($data->isEmpty())
