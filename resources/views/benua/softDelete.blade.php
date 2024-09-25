@@ -51,7 +51,7 @@
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
                                                 <!-- Button Force Delete -->
-                                                <form action="{{ route('benua_forceDelete', $item->id) }}" method="POST">
+                                                <form action="{{ route('benua.forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger" onclick="return 

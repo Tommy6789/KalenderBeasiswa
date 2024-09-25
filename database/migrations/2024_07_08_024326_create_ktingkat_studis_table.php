@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kbeasiswa');
             $table->unsignedBigInteger('id_tingkat_studi');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_kbeasiswa')->references('id')->on('kalender_beasiswas');
             $table->foreign('id_tingkat_studi')->references('id')->on('tingkat_studis');

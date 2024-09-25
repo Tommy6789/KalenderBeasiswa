@@ -35,7 +35,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 Tambah Benua</button>
 <!--Button To Page Soft Delete-->
-<a href="{{ route('benua_softDelete') }}" type="button"
+<a href="{{ route('benua.softDelete') }}" type="button"
 class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 
 <!-- Modal -->

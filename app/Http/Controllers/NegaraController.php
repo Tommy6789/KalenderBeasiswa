@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\benua;
 use App\Models\negara;
-use App\Http\Requests\NegaraRequest; // Import NegaraRequest
 use Illuminate\Http\Request;
 
 class NegaraController extends Controller
@@ -30,15 +29,20 @@ class NegaraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NegaraRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        $validate = $request->validate([
+            'nama' => 'required',
+            'id_benua' => 'required',
+        ]);
 
-        negara::create($validatedData);
+        Negara::create($validate);
 
         return redirect('/negara')
             ->with('success', 'Berhasil Menambah Negara');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -62,13 +66,16 @@ class NegaraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(NegaraRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $data = negara::findOrFail($id);
 
-        $validatedData = $request->validated();
-        $data->update($validatedData);
+        $validate = $request->validate([
+            'nama' => 'required',
+            'id_benua' => 'required'
+        ]);
 
+        $data->update($validate);
         return redirect('/negara')->with('success', 'Berhasil mengupdate negara');
     }
 
@@ -83,15 +90,16 @@ class NegaraController extends Controller
             // Soft delete the main negara record
             $Negara->delete();
 
-            return redirect()->route('negara.index')->with('success', 'Negara deleted successfully.');
+            return redirect()->route('negara.index')->with('success', 'Negara  deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('negara.index')->with('error', 'Failed to delete Negara.');
+            return redirect()->route('negara.index')->with('error', 'Failed to delete Negara Beasiswa.');
         }
     }
 
+
     /**
      * Display a listing of soft deleted resources.
-     * Retrieves all soft deleted negara.
+     * Retrieves all soft deleted scholarship calendars.
      */
     public function softDelete()
     {
@@ -108,25 +116,21 @@ class NegaraController extends Controller
             // Restore the main negara record
             $Negara->restore();
 
-            return redirect()->route('negara.index')->with('success', 'Negara restored successfully.');
+            return redirect()->route('negara.index')->with('success', 'Negara  restored successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('negara.index')->with('error', 'Failed to restore Negara.');
+            return redirect()->route('negara.index')->with('error', 'Failed to restore Negara .');
         }
     }
 
     public function forceDelete($id)
     {
-        try {
-            // Find the Negara with the given ID, including soft-deleted records
-            $Negara = negara::withTrashed()->findOrFail($id);
+        // Find the Negara with the given ID, including soft-deleted records
+        $Negara = negara::withTrashed()->findOrFail($id);
 
-            // Perform force delete
-            $Negara->forceDelete();
+        // Perform force delete
+        $Negara->forceDelete();
 
-            // Redirect back with success message
-            return redirect()->route('negara_softDelete')->with('success', 'Negara permanently deleted.');
-        } catch (\Exception $e) {
-            return redirect()->route('negara_softDelete')->with('error', 'Failed to permanently delete Negara.');
-        }
+        // Redirect back with success message
+        return redirect()->route('negara.softDelete')->with('success', 'Negara  permanently deleted.');
     }
 }

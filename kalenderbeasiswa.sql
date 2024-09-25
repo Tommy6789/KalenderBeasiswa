@@ -14,23 +14,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for kalenderbeasiswa
-CREATE DATABASE IF NOT EXISTS `kalenderbeasiswa` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `kalenderbeasiswa`;
-
--- Dumping structure for table kalenderbeasiswa.benuas
-CREATE TABLE IF NOT EXISTS `benuas` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- Dumping data for table kalenderbeasiswa.benuas: ~5 rows (approximately)
-DELETE FROM `benuas`;
 INSERT INTO `benuas` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'Asia', NULL, NULL, NULL),
 	(2, 'Africa', NULL, NULL, NULL),
@@ -38,187 +22,34 @@ INSERT INTO `benuas` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VA
 	(4, 'Europe', NULL, NULL, NULL),
 	(5, 'Australia', NULL, NULL, NULL);
 
--- Dumping structure for table kalenderbeasiswa.failed_jobs
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.failed_jobs: ~0 rows (approximately)
-DELETE FROM `failed_jobs`;
-
--- Dumping structure for table kalenderbeasiswa.kalender_beasiswas
-CREATE TABLE IF NOT EXISTS `kalender_beasiswas` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_user` bigint unsigned DEFAULT NULL,
-  `id_knegara` bigint unsigned DEFAULT NULL,
-  `id_ktingkat_studi` bigint unsigned DEFAULT NULL,
-  `tanggal_registrasi` date NOT NULL,
-  `deadline` date NOT NULL,
-  `judul` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `deskripsi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jurusan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jenis_beasiswa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keuntungan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `umur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gpa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tes_english` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tes_bahasa_lain` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tes_standard` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dokumen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lainnya` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_tampil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_knegara` (`id_knegara`),
-  KEY `id_ktingkat_studi` (`id_ktingkat_studi`),
-  CONSTRAINT `id_knegara` FOREIGN KEY (`id_knegara`) REFERENCES `knegaras` (`id`),
-  CONSTRAINT `id_ktingkat_studi` FOREIGN KEY (`id_ktingkat_studi`) REFERENCES `ktingkat_studis` (`id`),
-  CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.kalender_beasiswas: ~0 rows (approximately)
-DELETE FROM `kalender_beasiswas`;
-
--- Dumping structure for table kalenderbeasiswa.knegaras
-CREATE TABLE IF NOT EXISTS `knegaras` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_kbeasiswa` bigint unsigned NOT NULL,
-  `id_negara` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `knegaras_id_kbeasiswa_foreign` (`id_kbeasiswa`),
-  KEY `knegaras_id_negara_foreign` (`id_negara`),
-  CONSTRAINT `knegaras_id_kbeasiswa_foreign` FOREIGN KEY (`id_kbeasiswa`) REFERENCES `kalender_beasiswas` (`id`),
-  CONSTRAINT `knegaras_id_negara_foreign` FOREIGN KEY (`id_negara`) REFERENCES `negaras` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.knegaras: ~0 rows (approximately)
-DELETE FROM `knegaras`;
-
--- Dumping structure for table kalenderbeasiswa.ktingkat_studis
-CREATE TABLE IF NOT EXISTS `ktingkat_studis` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_kbeasiswa` bigint unsigned NOT NULL,
-  `id_tingkat_studi` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ktingkat_studis_id_kbeasiswa_foreign` (`id_kbeasiswa`),
-  KEY `ktingkat_studis_id_tingkat_studi_foreign` (`id_tingkat_studi`),
-  CONSTRAINT `ktingkat_studis_id_kbeasiswa_foreign` FOREIGN KEY (`id_kbeasiswa`) REFERENCES `kalender_beasiswas` (`id`),
-  CONSTRAINT `ktingkat_studis_id_tingkat_studi_foreign` FOREIGN KEY (`id_tingkat_studi`) REFERENCES `tingkat_studis` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.ktingkat_studis: ~0 rows (approximately)
-DELETE FROM `ktingkat_studis`;
-
--- Dumping structure for table kalenderbeasiswa.level_users
-CREATE TABLE IF NOT EXISTS `level_users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- Dumping data for table kalenderbeasiswa.level_users: ~3 rows (approximately)
-DELETE FROM `level_users`;
 INSERT INTO `level_users` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'Amin', NULL, '2024-08-04 18:21:51', '2024-08-04 18:21:51'),
+	(1, 'Admin', NULL, NULL, NULL),
 	(2, 'Editor', NULL, NULL, NULL),
-	(3, 'Subcriber', NULL, '2024-08-05 20:59:23', NULL);
+	(3, 'Subcriber', NULL, NULL, NULL);
 
--- Dumping structure for table kalenderbeasiswa.migrations
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.migrations: ~13 rows (approximately)
-DELETE FROM `migrations`;
+-- Dumping data for table kalenderbeasiswa.migrations: ~10 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-	(5, '2024_07_02_041314_create_level_users_table', 1),
-	(6, '2024_07_02_041549_create_benuas_table', 1),
-	(7, '2024_07_02_041648_create_negaras_table', 1),
-	(8, '2024_07_02_041657_create_tingkat_studis_table', 1),
-	(9, '2024_07_02_041755_create_kategoris_table', 1),
-	(10, '2024_07_02_043132_create_kalender_beasiswas_table', 1),
-	(13, '2024_07_08_024326_create_ktingkat_studis_table', 2),
-	(14, '2024_07_08_025236_create_knegaras_table', 2),
-	(16, '2024_07_29_014321_create_wishlists_table', 3);
+	(1, '2012_07_02_041314_create_level_users_table', 1),
+	(2, '2014_10_12_000000_create_users_table', 1),
+	(3, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+	(4, '2024_07_02_041549_create_benuas_table', 1),
+	(5, '2024_07_02_041648_create_negaras_table', 1),
+	(6, '2024_07_02_041657_create_tingkat_studis_table', 1),
+	(7, '2024_07_02_043132_create_kalender_beasiswas_table', 1),
+	(8, '2024_07_08_024326_create_ktingkat_studis_table', 1),
+	(9, '2024_07_08_042236_create_knegaras_table', 1),
+	(10, '2024_07_29_014321_create_wishlists_table', 1);
 
--- Dumping structure for table kalenderbeasiswa.model_has_permissions
-CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` bigint unsigned NOT NULL,
-  `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
-  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.model_has_permissions: ~0 rows (approximately)
-DELETE FROM `model_has_permissions`;
-
--- Dumping structure for table kalenderbeasiswa.model_has_roles
-CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` bigint unsigned NOT NULL,
-  `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
-  CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.model_has_roles: ~0 rows (approximately)
-DELETE FROM `model_has_roles`;
-
--- Dumping structure for table kalenderbeasiswa.negaras
-CREATE TABLE IF NOT EXISTS `negaras` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_benua` bigint unsigned NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_benua` (`id_benua`),
-  CONSTRAINT `id_benua` FOREIGN KEY (`id_benua`) REFERENCES `benuas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.negaras: ~194 rows (approximately)
-DELETE FROM `negaras`;
+-- Dumping data for table kalenderbeasiswa.negaras: ~0 rows (approximately)
 INSERT INTO `negaras` (`id`, `id_benua`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 1, 'Afghanistan', NULL, NULL, NULL),
-	(2, 4, 'Albania', NULL, '2024-08-05 21:48:23', NULL),
+	(2, 4, 'Albania', NULL, NULL, NULL),
 	(3, 2, 'Algeria', NULL, NULL, NULL),
 	(4, 4, 'Andorra', NULL, NULL, NULL),
 	(5, 2, 'Angola', NULL, NULL, NULL),
 	(6, 3, 'Antigua and Barbuda', NULL, NULL, NULL),
-	(7, 3, 'Argentina', NULL, '2024-08-05 21:57:52', NULL),
+	(7, 3, 'Argentina', NULL, NULL, NULL),
 	(9, 5, 'Australia', NULL, NULL, NULL),
 	(10, 4, 'Austria', NULL, NULL, NULL),
 	(11, 1, 'Azerbaijan', NULL, NULL, NULL),
@@ -250,7 +81,7 @@ INSERT INTO `negaras` (`id`, `id_benua`, `nama`, `created_at`, `updated_at`, `de
 	(37, 3, 'Colombia', NULL, NULL, NULL),
 	(38, 2, 'Comoros', NULL, NULL, NULL),
 	(39, 3, 'Costa Rica', NULL, NULL, NULL),
-	(40, 4, 'Croatia', NULL, '2024-08-05 21:57:59', NULL),
+	(40, 4, 'Croatia', NULL, NULL, NULL),
 	(41, 3, 'Cuba', NULL, NULL, NULL),
 	(42, 4, 'Cyprus', NULL, NULL, NULL),
 	(43, 4, 'Czech Republic', NULL, NULL, NULL),
@@ -407,147 +238,20 @@ INSERT INTO `negaras` (`id`, `id_benua`, `nama`, `created_at`, `updated_at`, `de
 	(194, 2, 'Zambia', NULL, NULL, NULL),
 	(195, 2, 'Zimbabwe', NULL, NULL, NULL);
 
--- Dumping structure for table kalenderbeasiswa.password_reset_tokens
-CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.password_reset_tokens: ~0 rows (approximately)
-DELETE FROM `password_reset_tokens`;
-
--- Dumping structure for table kalenderbeasiswa.permissions
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.permissions: ~0 rows (approximately)
-DELETE FROM `permissions`;
-
--- Dumping structure for table kalenderbeasiswa.personal_access_tokens
-CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- Dumping data for table kalenderbeasiswa.personal_access_tokens: ~0 rows (approximately)
-DELETE FROM `personal_access_tokens`;
 
--- Dumping structure for table kalenderbeasiswa.roles
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.roles: ~0 rows (approximately)
-DELETE FROM `roles`;
-
--- Dumping structure for table kalenderbeasiswa.role_has_permissions
-CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` bigint unsigned NOT NULL,
-  `role_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `role_has_permissions_role_id_foreign` (`role_id`),
-  CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.role_has_permissions: ~0 rows (approximately)
-DELETE FROM `role_has_permissions`;
-
--- Dumping structure for table kalenderbeasiswa.tingkat_studis
-CREATE TABLE IF NOT EXISTS `tingkat_studis` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tingkat_studis_nama_unique` (`nama`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.tingkat_studis: ~4 rows (approximately)
-DELETE FROM `tingkat_studis`;
+-- Dumping data for table kalenderbeasiswa.tingkat_studis: ~0 rows (approximately)
 INSERT INTO `tingkat_studis` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'S1', NULL, '2024-08-05 21:46:16', NULL),
-	(2, 'S2', NULL, '2024-08-07 18:48:28', NULL),
-	(3, 'S3', NULL, '2024-08-04 21:18:01', NULL),
+	(1, 'S1', NULL, NULL, NULL),
+	(2, 'S2', NULL, NULL, NULL),
+	(3, 'S3', NULL, NULL, NULL),
 	(4, 'Diploma', NULL, NULL, NULL);
 
--- Dumping structure for table kalenderbeasiswa.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_level_user` bigint unsigned NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nomer_telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tanggal_lahir` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  KEY `id_level_user` (`id_level_user`),
-  CONSTRAINT `id_level_user` FOREIGN KEY (`id_level_user`) REFERENCES `level_users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- Dumping data for table kalenderbeasiswa.users: ~1 rows (approximately)
-DELETE FROM `users`;
-INSERT INTO `users` (`id`, `id_level_user`, `nama`, `email`, `email_verified_at`, `password`, `remember_token`, `nomer_telepon`, `alamat`, `tanggal_lahir`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 3, 'Admin', 'Admin789@gmail.com', NULL, '$2y$12$G92Kth8HPeyrIESTLygHG.Uo3ZwAfNFPxtp2DdbMcXluzKnNVp3SO', NULL, '081223334455', 'Kediri', '2024-09-09', '2024-09-09 00:00:51', '2024-09-09 00:00:51', NULL);
+INSERT INTO `users` (`id`, `id_level_user`, `nama`, `email`, `email_verified_at`, `password`, `nomer_telepon`, `alamat`, `tanggal_lahir`, `created_at`, `updated_at`, `deleted_at`, `remember_token`) VALUES
+	(1, 1, 'Admin', 'Admin789@gmail.com', NULL, '$2y$12$G92Kth8HPeyrIESTLygHG.Uo3ZwAfNFPxtp2DdbMcXluzKnNVp3SO', '081223334455', 'Kediri', '2024-09-09', '2024-09-09 00:00:51', '2024-09-09 00:00:51', NULL, NULL);
 
--- Dumping structure for table kalenderbeasiswa.wishlists
-CREATE TABLE IF NOT EXISTS `wishlists` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `id_kbeasiswa` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_kbeasiswa` (`id_kbeasiswa`),
-  CONSTRAINT `id_kbeasiswa` FOREIGN KEY (`id_kbeasiswa`) REFERENCES `kalender_beasiswas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table kalenderbeasiswa.wishlists: ~9 rows (approximately)
-DELETE FROM `wishlists`;
-INSERT INTO `wishlists` (`id`, `id_kbeasiswa`, `created_at`, `updated_at`) VALUES
-	(27, 15, '2024-08-04 18:19:28', '2024-08-04 18:19:28'),
-	(31, 11, '2024-08-05 05:13:28', '2024-08-05 05:13:28'),
-	(32, 11, '2024-08-05 17:49:47', '2024-08-05 17:49:47'),
-	(33, 11, '2024-08-05 23:05:51', '2024-08-05 23:05:51'),
-	(36, 16, '2024-08-05 23:13:55', '2024-08-05 23:13:55'),
-	(37, 16, '2024-08-05 23:16:43', '2024-08-05 23:16:43'),
-	(44, 28, '2024-08-08 01:33:57', '2024-08-08 01:33:57'),
-	(45, 28, '2024-08-08 01:34:05', '2024-08-08 01:34:05'),
-	(46, 28, '2024-08-08 01:34:43', '2024-08-08 01:34:43');
-
+-- Dumping data for table kalenderbeasiswa.withlists: ~0 rows (approximately)
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

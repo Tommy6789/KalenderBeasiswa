@@ -66,7 +66,7 @@
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>
-                                                        @foreach ($item->tingkat_studi as $tingkat)
+                                                        @foreach ($item->tingkatStudi as $tingkat)
                                                             {{ $tingkat->nama }}<br>
                                                         @endforeach
                                                     </td>

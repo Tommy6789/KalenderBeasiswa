@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProposalRequest; // Import ProposalRequest
 use App\Models\kalenderBeasiswa;
 use App\Models\negara;
 use App\Models\tingkatStudi;
+use Illuminate\Http\Request;
 
 class ProposalController extends Controller
 {
@@ -28,12 +28,27 @@ class ProposalController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(ProposalRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        // Validation rules for incoming request data
+        $validatedData = $request->validate([
+            'tanggal_registrasi' => 'nullable',
+            'deadline' => 'nullable',
+            'judul' => 'nullable',
+            'nama' => 'nullable',
+            'deskripsi' => 'nullable',
+            'jurusan' => 'nullable',
+            'jenis_beasiswa' => 'nullable',
+            'keuntungan' => 'nullable',
+            'umur' => 'nullable',
+            'gpa' => 'nullable',
+            'tes_english' => 'nullable',
+            'tes_bahasa_lain' => 'nullable',
+            'tes_standard' => 'nullable',
+            'dokumen' => 'nullable',
+            'lainnya' => 'nullable',
+            'status_tampil' => 'nullable'
+        ]);
 
         // Create a new kalenderBeasiswa record with validated data
         $kalenderBeasiswa = kalenderBeasiswa::create($validatedData);
@@ -50,6 +65,13 @@ class ProposalController extends Controller
 
         return redirect()->route('frontend.proposal')->with('success', 'Proposal created successfully.');
     }
+
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+
 
     /**
      * Display the specified resource.
@@ -70,7 +92,7 @@ class ProposalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProposalRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         //
     }

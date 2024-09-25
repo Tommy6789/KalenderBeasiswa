@@ -7,12 +7,10 @@
 <style>
     .page-section {
         padding: 4rem 0;
-        /* Ensure adequate padding for sections */
     }
 
     .container {
         padding: 0 2rem;
-        /* Increase left and right padding for the entire container */
     }
 
     body {
@@ -26,45 +24,36 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* Space between content and button */
         height: 100%;
-        /* Ensure the card takes full height */
     }
 
     .card-body {
         padding: 2rem;
         flex: 1;
-        /* Make sure content takes up remaining space */
     }
 
     .display-4 {
         font-size: 2.5rem;
-        /* Adjust as needed for title size */
     }
 
     .display-5 {
         font-size: 2rem;
-        /* Adjust as needed for section headings */
     }
 
     .list-unstyled {
         padding-left: 0;
-        /* Remove default list padding */
     }
 
     .list-unstyled li {
         margin-bottom: 0.5rem;
-        /* Add space between list items */
     }
 
     .mb-5 {
         margin-bottom: 3rem;
-        /* Space between sections */
     }
 
     .mb-3 {
         margin-bottom: 1.5rem;
-        /* Space between elements within a section */
     }
 
     .btn-register {
@@ -74,18 +63,16 @@
         font-weight: 500;
         color: #fff;
         background-color: #007bff;
-        /* Primary color */
         border: none;
         border-radius: 0.375rem;
         transition: background-color 0.3s ease;
         text-align: center;
         margin-top: auto;
-        /* Pushes button to the bottom of the card */
+        text-decoration: none; /* Remove underline */
     }
 
     .btn-register:hover {
         background-color: #0056b3;
-        /* Darker color on hover */
         text-decoration: none;
     }
 
@@ -102,6 +89,7 @@
         margin-bottom: 0.5rem;
     }
 </style>
+
 
 <!-- Detail Kalender Beasiswa -->
 <section class="page-section" id="DetailKalenderBeasiswa">

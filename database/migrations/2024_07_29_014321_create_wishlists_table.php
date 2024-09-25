@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('withlists', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_kbeasiswa');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_kbeasiswa')->references('id')->on('kalender_beasiswas');
         });

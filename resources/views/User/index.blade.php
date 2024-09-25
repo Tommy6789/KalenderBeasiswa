@@ -34,7 +34,7 @@
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah User</button>
           <!--Button To Page Soft Delete-->
-          <a href="{{ route('user_softDelete') }}" type="button" class="btn btn-warning ml-auto">Lihat Soft Delete</a>
+          <a href="{{ route('user.softDelete') }}" type="button" class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

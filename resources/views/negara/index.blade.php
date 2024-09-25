@@ -35,7 +35,7 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#exampleModal">Tambah Negara</button>
                                 <!--Button To Page Soft Delete-->
-                                <a href="{{ route('negara_softDelete') }}" type="button"
+                                <a href="{{ route('negara.softDelete') }}" type="button"
                                     class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 
                                 <!-- Modal -->

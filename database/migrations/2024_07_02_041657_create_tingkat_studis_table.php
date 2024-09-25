@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('tingkat_studis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->unique();
+            $table->string('nama');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

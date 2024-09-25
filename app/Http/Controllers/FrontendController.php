@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FrontendKalenderRequest;
-use App\Models\KalenderBeasiswa;
+use App\Models\kalenderBeasiswa;
 use App\Models\Negara;
-use App\Models\TingkatStudi;
+use App\Models\tingkatStudi;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -15,16 +14,15 @@ class FrontendController extends Controller
       return view('frontend.home');
    }
 
-   public function kalender(FrontendKalenderRequest $request)
+   public function kalender(Request $request)
    {
-      $tingkatStudi = TingkatStudi::all(); // Ambil data Tingkat Studi
-      $negara = Negara::all(); // Ambil data Negara
-      $sort = $request->query('sort', 'desc'); // Default sort adalah descending (terbaru)
-
-      $data = KalenderBeasiswa::with(['negara', 'tingkatStudi'])
+      $sort = $request->query('sort', 'desc'); // Default sort is descending (newest first)
+      $data = kalenderBeasiswa::with(['negara', 'tingkatStudi'])
          ->where('status_tampil', 1)
          ->orderBy('tanggal_registrasi', $sort)
          ->get();
+      $negara = Negara::all();
+      $tingkatStudi = tingkatStudi::all();
 
       if ($request->ajax()) {
          return response()->json([
@@ -40,25 +38,20 @@ class FrontendController extends Controller
 
    public function filter(Request $request)
    {
-      $query = KalenderBeasiswa::query();
-
-      // Track if the filter is applied
+      $query = kalenderBeasiswa::query();
       $isJenisBeasiswaFiltered = $request->has('jenis_beasiswa');
       $sort = $request->query('sort', 'desc'); // Default sort is descending (newest first)
 
-      // Filter by Tingkat Studi
       if ($request->has('id_tingkat_studi')) {
          $query->whereHas('tingkatStudi', function ($q) use ($request) {
             $q->whereIn('tingkat_studis.id', $request->id_tingkat_studi);
          });
       }
 
-      // Filter by Jenis Beasiswa
       if ($isJenisBeasiswaFiltered) {
          $query->whereIn('jenis_beasiswa', $request->jenis_beasiswa);
       }
 
-      // Filter by Negara
       if ($request->has('id_negara')) {
          $query->whereHas('negara', function ($q) use ($request) {
             $q->whereIn('negaras.id', $request->id_negara);
@@ -67,18 +60,15 @@ class FrontendController extends Controller
 
       $data = $query->with('negara', 'tingkatStudi')->orderBy('tanggal_registrasi', $sort)->get();
       $negara = Negara::all();
-      $tingkatStudi = TingkatStudi::all();
+      $tingkatStudi = tingkatStudi::all();
 
-      // Redirect to kalender view with a not found message if no articles are found
-      if ($data->isEmpty()) {
-         $message = $isJenisBeasiswaFiltered ? 'No articles found for the selected "Jenis Beasiswa"' : 'No articles found';
-
-         return view('frontend.kalender', [
-            'data' => collect(), // Passing an empty collection
+      if ($request->ajax()) {
+         return response()->json([
+            'data' => $data,
             'negara' => $negara,
             'tingkatStudi' => $tingkatStudi,
-            'message' => $message,
-            'sort' => $sort // Pass sort parameter to view
+            'message' => $data->isEmpty() ? 'No articles found' : null,
+            'sort' => $sort
          ]);
       }
 
@@ -86,16 +76,15 @@ class FrontendController extends Controller
          'data' => $data,
          'negara' => $negara,
          'tingkatStudi' => $tingkatStudi,
-         'sort' => $sort // Pass sort parameter to view
+         'sort' => $sort
       ]);
    }
 
-
    public function detail($id)
    {
-      $data = KalenderBeasiswa::with('negara', 'tingkatStudi')->findOrFail($id);
+      $data = kalenderBeasiswa::with('negara', 'tingkatStudi')->findOrFail($id);
       $negara = Negara::all();
-      $tingkatStudi = TingkatStudi::all();
+      $tingkatStudi = tingkatStudi::all();
 
       if (request()->ajax()) {
          return response()->json([
@@ -114,7 +103,7 @@ class FrontendController extends Controller
 
    public function daftarBeasiswa($id)
    {
-      $beasiswa = KalenderBeasiswa::findOrFail($id);
+      $beasiswa = kalenderBeasiswa::findOrFail($id);
 
       if (request()->ajax()) {
          return response()->json([

@@ -45,11 +45,11 @@
                                             <td>{{ $item->deleted_at->format('d-m-Y H:i:s') }}</td>
                                             <td>{{ $item->deleted_at->addDays(30)->diffForHumans(null, true) }}</td>
                                             <td>
-                                                <form action="{{ route('level_user_restore', $item->id) }}" method="POST">
+                                                <form action="{{ route('levelUser_restore', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Restore</button>
                                                 </form>
-                                                <form action="{{ route('level_user_forceDelete', $item->id) }}" method="POST">
+                                                <form action="{{ route('levelUser.forceDelete', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger"
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('level_user.index') }}" class="btn btn-primary">Kembali Level User</a>
+                        <a href="{{ route('levelUser.index') }}" class="btn btn-primary">Kembali Level User</a>
                     </div>
                 </div>
             </div>

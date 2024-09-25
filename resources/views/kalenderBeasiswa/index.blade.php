@@ -40,7 +40,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TambahKalenderBeasiswa">Tambah Kalender</button>
 
     <!-- Button to Soft Delete Page -->
-    <a href="{{ route('kbeasiswa_softDelete') }}" type="button" class="btn btn-warning ml-auto">Lihat Soft Delete</a>
+    <a href="{{ route('kbeasiswa.softDelete') }}" type="button" class="btn btn-warning ml-auto">Lihat Soft Delete</a>
 
     <!-- Add Calendar Modal -->
     <div class="modal fade" id="TambahKalenderBeasiswa" tabindex="-1" aria-labelledby="TambahKalenderBeasiswaLabel" aria-hidden="true">

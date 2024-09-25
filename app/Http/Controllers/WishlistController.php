@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\WishlistRequest; // Import WishlistRequest
+use Illuminate\Http\Request;
 use App\Models\Wishlist;
 use App\Models\kalender_beasiswa;
 
@@ -29,8 +29,12 @@ class WishlistController extends Controller
         return view('frontend.wishlist', compact('wishlists'));
     }
 
-    public function store(WishlistRequest $request)
+    public function store(Request $request)
     {
+        $request->validate([
+            'id_kbeasiswa' => 'required|exists:kalender_beasiswas,id',
+        ]);
+
         Wishlist::create([
             'id_kbeasiswa' => $request->id_kbeasiswa,
         ]);
@@ -49,8 +53,12 @@ class WishlistController extends Controller
         return redirect()->back()->with('error', 'Item not found in wishlist.');
     }
 
-    public function add(WishlistRequest $request)
+    public function add(Request $request)
     {
+        $request->validate([
+            'id_kbeasiswa' => 'required|exists:kalender_beasiswa,id',
+        ]);
+
         $existingWishlist = Wishlist::where('id_kbeasiswa', $request->id_kbeasiswa)->first();
 
         if ($existingWishlist) {

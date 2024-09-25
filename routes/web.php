@@ -73,32 +73,32 @@ Route::group(['middleware' => 'auth'], function () {
   Route::patch('/kalenderBeasiswa/{id}/accept', [KalenderBeasiswaController::class, 'accept'])->name('kalenderBeasiswa.accept');
 
   // Route soft delete, restore, and force delete for Kalender Beasiswa
-  Route::get('kbeasiswa_softDelete', [KalenderBeasiswaController::class, 'softDelete'])->name('kbeasiswa_softDelete');
+  Route::get('kbeasiswa.softDelete', [KalenderBeasiswaController::class, 'softDelete'])->name('kbeasiswa.softDelete');
   Route::post('kalenderBeasiswa/restore/{id}', [KalenderBeasiswaController::class, 'restore'])->name('kbeasiswa_restore');
-  Route::delete('kalenderBeasiswa/forceDelete/{id}', [KalenderBeasiswaController::class, 'forceDelete'])->name('kbeasiswa_forceDelete');
+  Route::delete('kalenderBeasiswa/forceDelete/{id}', [KalenderBeasiswaController::class, 'forceDelete'])->name('kbeasiswa.forceDelete');
 
   // Route soft delete, restore, and force delete for Tingkat Studi
-  Route::get('tingkatStudi_softDelete', [TingkatStudiController::class, 'softDelete'])->name('tingkatStudi_softDelete');
+  Route::get('tingkatStudi.softDelete', [TingkatStudiController::class, 'softDelete'])->name('tingkatStudi.softDelete');
   Route::post('tingkatStudi/restore/{id}', [TingkatStudiController::class, 'restore'])->name('tingkatStudi_restore');
-  Route::delete('tingkatStudi/forceDelete/{id}', [TingkatStudiController::class, 'forceDelete'])->name('tingkatStudi_forceDelete');
+  Route::delete('tingkatStudi/forceDelete/{id}', [TingkatStudiController::class, 'forceDelete'])->name('tingkatStudi.forceDelete');
 
   // Route soft delete, restore, and force delete for Negara
-  Route::get('negara_softDelete', [NegaraController::class, 'softDelete'])->name('negara_softDelete');
+  Route::get('negara.softDelete', [NegaraController::class, 'softDelete'])->name('negara.softDelete');
   Route::post('negara/restore/{id}', [NegaraController::class, 'restore'])->name('negara_restore');
-  Route::delete('negara/forceDelete/{id}', [NegaraController::class, 'forceDelete'])->name('negara_forceDelete');
+  Route::delete('negara/forceDelete/{id}', [NegaraController::class, 'forceDelete'])->name('negara.forceDelete');
 
   // Route soft delete, restore, and force delete for Benua
-  Route::get('benua_softDelete', [BenuaController::class, 'softDelete'])->name('benua_softDelete');
+  Route::get('benua.softDelete', [BenuaController::class, 'softDelete'])->name('benua.softDelete');
   Route::post('benua/restore/{id}', [BenuaController::class, 'restore'])->name('benua_restore');
-  Route::delete('benua/forceDelete/{id}', [BenuaController::class, 'forceDelete'])->name('benua_forceDelete');
+  Route::delete('benua/forceDelete/{id}', [BenuaController::class, 'forceDelete'])->name('benua.forceDelete');
 
   // Route soft delete, restore, and force delete for User
-  Route::get('user_softDelete', [UserController::class, 'softDelete'])->name('user_softDelete');
+  Route::get('user.softDelete', [UserController::class, 'softDelete'])->name('user.softDelete');
   Route::post('user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-  Route::delete('user/forceDelete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+  Route::delete('user/forceDelete/{id}', [UserController::class, 'forceDelete'])->name('user.forceDelete');
 
   // Route soft delete, restore, and force delete for Level User
-  Route::get('levelUser_softDelete', [LevelUserController::class, 'softDelete'])->name('levelUser_softDelete');
+  Route::get('levelUser.softDelete', [LevelUserController::class, 'softDelete'])->name('levelUser.softDelete');
   Route::post('levelUser/restore/{id}', [LevelUserController::class, 'restore'])->name('levelUser_restore');
-  Route::delete('levelUser/forceDelete/{id}', [LevelUserController::class, 'forceDelete'])->name('levelUser_forceDelete');
+  Route::delete('levelUser/forceDelete/{id}', [LevelUserController::class, 'forceDelete'])->name('levelUser.forceDelete');
 });

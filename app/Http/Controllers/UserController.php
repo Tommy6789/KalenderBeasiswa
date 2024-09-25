@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\levelUser;
 use App\Models\user;
-use App\Http\Requests\UserRequest; // Import UserRequest
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
@@ -30,9 +30,19 @@ class userController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required',
+            'id_level_user' => 'required',
+            'nomer_telepon' => 'nullable',
+            'alamat' => 'nullable',
+            'tanggal_lahir' => 'nullable|date',
+        ]);
 
         // Create a new user instance
         $user = new user();
@@ -40,9 +50,7 @@ class userController extends Controller
         // Assign validated data to the user instance
         $user->nama = $request->nama;
         $user->email = $request->email;
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
+        $user->password = Hash::make($request->password);
         $user->id_level_user = $request->id_level_user;
         $user->nomer_telepon = $request->nomer_telepon;
         $user->alamat = $request->alamat;
@@ -51,7 +59,7 @@ class userController extends Controller
         // Save the user instance to the database
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User added successfully.');
+        return redirect()->route('user.index')->with('success', 'user added successfully.');
     }
 
     /**
@@ -70,21 +78,28 @@ class userController extends Controller
     {
         $data = user::findOrFail($id);
         $levelUser = levelUser::all();
-        return view('user.edit', compact('data', 'levelUser'));
+        return view('user.edit', compact('user', 'levels'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validated();
+        $request->validate([
+            'nama' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'id_level_user' => 'required|exists:level_users,id',
+            'nomer_telepon' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+        ]);
+
         $user = user::findOrFail($id);
         $user->nama = $request->nama;
         $user->email = $request->email;
-
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            $user->password = bcrypt($request->password);
         }
         $user->id_level_user = $request->id_level_user;
         $user->nomer_telepon = $request->nomer_telepon;
@@ -92,7 +107,7 @@ class userController extends Controller
         $user->tanggal_lahir = $request->tanggal_lahir;
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User updated successfully.');
+        return redirect()->route('user.index')->with('success', 'user updated successfully.');
     }
 
     /**
@@ -106,15 +121,16 @@ class userController extends Controller
             // Soft delete the main user record
             $user->delete();
 
-            return redirect()->route('user.index')->with('success', 'User deleted successfully.');
+            return redirect()->route('user.index')->with('success', 'user deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('user.index')->with('error', 'Failed to delete user.');
+            return redirect()->route('user.index')->with('error', 'Failed to delete Kalender Beasiswa.');
         }
     }
 
+
     /**
      * Display a listing of soft deleted resources.
-     * Retrieves all soft deleted users.
+     * Retrieves all soft deleted scholarship calendars.
      */
     public function softDelete()
     {
@@ -131,25 +147,21 @@ class userController extends Controller
             // Restore the main user record
             $user->restore();
 
-            return redirect()->route('user.index')->with('success', 'User restored successfully.');
+            return redirect()->route('user.index')->with('success', 'user restored successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('user.index')->with('error', 'Failed to restore user.');
+            return redirect()->route('user.index')->with('error', 'Failed to restore Kalender Beasiswa.');
         }
     }
 
     public function forceDelete($id)
     {
-        try {
-            // Find the user with the given ID, including soft-deleted records
-            $user = user::withTrashed()->findOrFail($id);
+        // Find the user with the given ID, including soft-deleted records
+        $user = user::withTrashed()->findOrFail($id);
 
-            // Perform force delete
-            $user->forceDelete();
+        // Perform force delete
+        $user->forceDelete();
 
-            // Redirect back with success message
-            return redirect()->route('user_softDelete')->with('success', 'User permanently deleted.');
-        } catch (\Exception $e) {
-            return redirect()->route('user_softDelete')->with('error', 'Failed to permanently delete user.');
-        }
+        // Redirect back with success message
+        return redirect()->route('user.softDelete')->with('success', 'user permanently deleted.');
     }
 }

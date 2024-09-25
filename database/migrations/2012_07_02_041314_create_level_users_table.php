@@ -8,17 +8,16 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            // Hapus foreign key jika ada
-            if (Schema::hasColumn('users', 'id_level_user')) {
-                $table->dropForeign(['id_level_user']);
-                $table->dropColumn('id_level_user');
-            }
+        Schema::create('level_users', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down()
     {
-        // Tidak perlu implementasi down karena ini adalah fix
+        Schema::dropIfExists('level_users');
     }
 };

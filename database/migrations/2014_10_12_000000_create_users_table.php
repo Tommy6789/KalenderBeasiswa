@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
+            $table->unsignedBigInteger('id_level_user')->nullable();
             $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->unsignedBigInteger('id_level_user')->nullable();
             $table->string('nomer_telepon')->nullable();
             $table->text('alamat')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            $table->rememberToken();
         
             $table->foreign('id_level_user')->references('id')->on('level_users');
         });

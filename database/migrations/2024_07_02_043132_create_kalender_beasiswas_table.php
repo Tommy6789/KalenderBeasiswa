@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('kalender_beasiswas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_kategori');
             $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_negara');
-            $table->unsignedBigInteger('id_tingkat_studi');
             $table->date('tanggal_registrasi');
             $table->date('deadline');
             $table->string('judul');
@@ -31,12 +28,12 @@ return new class extends Migration
             $table->string('tes_standard');
             $table->string('dokumen');
             $table->string('lainnya');
+            $table->string('link');
             $table->enum('status_tampil',['1','0'] );
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_negara')->references('id')->on('negaras');
-            $table->foreign('id_tingkat_studi')->references('id')->on('tingkat_studis');
         });
     }
 
